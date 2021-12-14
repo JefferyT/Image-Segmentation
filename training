@@ -1,0 +1,80 @@
+BATCH_SIZE = 8
+TEST_BATCH_SIZE = 10
+EPOCHS = 20
+LEARNING_RATE = 0.008
+MOMENTUM = 0.9
+USE_CUDA = True
+SEED = 0
+PRINT_INTERVAL = 100
+WEIGHT_DECAY = 0.001
+
+EXPERIMENT_VERSION = "0.0" # increment this to start a new experiment
+LOG_PATH = DATA_PATH + 'logs/' + EXPERIMENT_VERSION + '/'
+
+# Now the actual training code
+use_cuda = USE_CUDA and torch.cuda.is_available()
+
+#torch.manual_seed(SEED)
+
+device = torch.device("cuda" if use_cuda else "cpu")
+print('Using device', device)
+import multiprocessing
+print('num cpus:', multiprocessing.cpu_count())
+
+kwargs = {'num_workers': 0,
+          'pin_memory': True} if use_cuda else {}
+
+# class_names = [line.strip().split(', ') for line in open(DATA_PATH + 'class_names.txt')]
+# name_to_class = {line[1]: line[0] for line in class_names}
+# class_names = [line[1] for line in class_names]
+
+train_loader = torch.utils.data.DataLoader(train_set, batch_size=BATCH_SIZE,
+                                           shuffle=True, **kwargs)
+test_loader = torch.utils.data.DataLoader(test_set, batch_size=TEST_BATCH_SIZE,
+                                          shuffle=False, **kwargs)
+
+model = VGG16SegmentNet().to(device)
+optimizer = optim.SGD(model.parameters(), lr=LEARNING_RATE, momentum=MOMENTUM, weight_decay=WEIGHT_DECAY)
+start_epoch = model.load_last_model(LOG_PATH)
+
+train_losses, test_losses, test_accuracies = pt_util.read_log(LOG_PATH + 'log.pkl', ([], [], []))
+test_loss, test_accuracy, correct_images, correct_val, error_images, predicted_val, gt_val = test(model, device, test_loader, True)
+
+# correct_images = pt_util.to_scaled_uint8(correct_images.transpose(0, 2, 3, 1))
+# error_images = pt_util.to_scaled_uint8(error_images.transpose(0, 2, 3, 1))
+# pt_util.show_images(correct_images, ['correct: %s' % class_names[aa] for aa in correct_val])
+# pt_util.show_images(error_images, ['pred: %s, actual: %s' % (class_names[aa], class_names[bb]) for aa, bb in zip(predicted_val, gt_val)])
+
+test_losses.append((start_epoch, test_loss))
+# test_accuracies.append((start_epoch, test_accuracy))
+
+try:
+    # for epoch in range(0, EPOCHS + 1):
+    for epoch in range(start_epoch, EPOCHS + 1):
+        train_loss = train(model, device, train_loader, optimizer, epoch, PRINT_INTERVAL)
+        # test_loss, test_accuracy, correct_images, correct_val, error_images, predicted_val, gt_val = test(model, device, test_loader, True)
+        # train_losses.append((epoch, train_loss))
+        # test_losses.append((epoch, test_loss))
+        # test_accuracies.append((epoch, test_accuracy))
+        # pt_util.write_log(LOG_PATH + '.pkl', (train_losses, test_accuracies))
+        # model.save_best_model(test_accuracy, LOG_PATH + '%03d.pt' % epoch)
+
+
+except KeyboardInterrupt as ke:
+    print('Interrupted')
+except:
+    import traceback
+    traceback.print_exc()
+# finally:
+#     model.save_model(LOG_PATH + '%03d.pt' % epoch, 0)
+#     ep, val = zip(*train_losses)
+#     pt_util.plot(ep, val, 'Train loss', 'Epoch', 'Error')
+#     ep, val = zip(*test_losses)
+#     pt_util.plot(ep, val, 'Test loss', 'Epoch', 'Error')
+#     ep, val = zip(*test_accuracies)
+    # pt_util.plot(ep, val, 'Test accuracy', 'Epoch', 'Accuracy')
+    # correct_images = pt_util.to_scaled_uint8(correct_images.transpose(0, 2, 3, 1))
+    # error_images = pt_util.to_scaled_uint8(error_images.transpose(0, 2, 3, 1))
+    # pt_util.show_images(correct_images, ['correct: %s' % class_names[aa] for aa in correct_val])
+    # pt_util.show_images(error_images, ['pred: %s, actual: %s' % (class_names[aa], class_names[bb]) for aa, bb in zip(predicted_val, gt_val)])
+

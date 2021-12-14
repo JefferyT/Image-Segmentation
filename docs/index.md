@@ -2,11 +2,31 @@
 
 ## Abstract
 
+To continue our understanding of deep learning with images, we wanted to create an application that can perform blurring on camera input, blurring unidentified objects in the background. We trained encoders and decoders to take an image and produce a mask. We then created a program that can use our model and blur the background of webcam images by creating a segmentation mask.
+
 ## Problem Statement
 
 ## Related Work
 
 ## Methodology
+
+We split the project into 4 parts that could be worked on by each member of the group. The parts include pre-processing the data, creating and training a model, blurring an image given a mask, and creating an application that can take in camera input, using our model, and blur the background in real time.
+
+### Pre-processing the data:
+
+For our data, we used Pytorch’s Pascal VOC Dataset, training with year=2012. This produces an image of variable size as the data and a label that is a PNG. In order to train our model, we needed to resize every image. We ended up using cv2’s resize method.
+
+### Creating the model:
+
+Hello
+
+### Blurring an image using a mask:
+
+Hello
+
+### Developing an app to blur in real-time:
+
+Hello
 
 ## Experiments/Evaluation
 

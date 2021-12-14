@@ -1,4 +1,9 @@
-## Welcome to GitHub Pages
+# Segmented Image Blurring
+
+
+
+
+
 
 You can use the [editor on GitHub](https://github.com/JefferyT/Image-Segmentation/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
 

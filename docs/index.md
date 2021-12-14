@@ -1,6 +1,20 @@
 # Segmented Image Blurring
 
+## Abstract
 
+## Problem Statement
+
+## Related Work
+
+## Methodology
+
+## Experiments/Evaluation
+
+## Results
+
+## Examples
+
+## Video
 
 
 

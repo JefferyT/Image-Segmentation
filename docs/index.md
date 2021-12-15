@@ -43,6 +43,16 @@ While training our model, we only evaluated loss and not accuracy, calculating a
 
 As mentioned above, our average training loss was around 1.0 and both our training and testing accuracy was 5%. This is to be expected as many of the other segmentation networks we have learned about took a couple days to train on significant hardware and we were not able to train for nearly as long. Our image blurring was able to work relatively successfully as it did seem to be able to create masks of faces.
 
+Example results
+
+Original image: 
+![Image](images/original.png)
+
+Mask image produced by the model:
+![Image](images/mask.png)
+
+Blurred image:
+![Image](images/blurred.png)
 
 
 ## Examples

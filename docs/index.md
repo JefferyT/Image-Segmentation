@@ -42,7 +42,7 @@ As mentioned above, our average training loss was around 1.0 and both our traini
 
 ## Examples
 
-Demo video with our model: [https://www.youtube.com/watch?v=dSxqTCrftx8]
+Demo video with our model: [https://www.youtube.com/watch?v=dSxqTCrftx8](https://www.youtube.com/watch?v=dSxqTCrftx8)
 
 ## Video Presentation
 

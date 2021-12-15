@@ -61,7 +61,7 @@ Demo video with our model: [https://www.youtube.com/watch?v=dSxqTCrftx8](https:/
 
 ## Video Presentation
 
-
+Video presentation: [https://www.youtube.com/watch?v=inp2lzBVVgE](https://www.youtube.com/watch?v=inp2lzBVVgE)
 
 
 You can use the [editor on GitHub](https://github.com/JefferyT/Image-Segmentation/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.

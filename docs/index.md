@@ -6,9 +6,14 @@ To continue our understanding of deep learning with images, we wanted to create 
 
 ## Problem Statement
 
-
+We wanted to make a program that would use semantic segmentation to allow the user to effectively apply filters to specific objects in an image or video.
 
 ## Related Work
+
+For this project, we wanted to experiment with semantic segmentation and some practical applications of it. We decided to create and train our own model to get a better grasp of how the models work. We looked at this paper on semantic segmentation that was recommended in class: (https://arxiv.org/pdf/1505.04366.pdf), and implemented the described network. This network was originally trained in 2 parts, training the encoder and then training the decoder so we experimented with training in one part to save time.
+
+We also looked at the DeepLabv3 but the time required to train another model was too significant so we tried using the pretrained DeepLabv3 with our implementation instead.
+
 
 ## Methodology
 
